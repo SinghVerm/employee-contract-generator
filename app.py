@@ -17,6 +17,26 @@ st.set_page_config(page_title="Employee Contract Generator", layout="centered")
 TEMPLATE_FILE = "Contract_template.docx"
 POSITION = "Cleaning Services Employee"
 PAY_RATE = "$30.35 per hour"
+COMPANIES = {
+    "Cockburn Gateways": {
+        "company_name": "Finolex Auto Pty Ltd",
+        "company_address": "Cockburn Gateways",
+        "manager_name": "Harpreet Singh",
+        "manager_phone": "0414409284",
+    },
+    "Galleria (Ks & K Pty Ltd)": {
+        "company_name": "Ks & K Pty Ltd",
+        "company_address": "Star Car Wash - Galleria, Galleria Shopping Centre, 4 Collier Rd, Morley WA 6062",
+        "manager_name": "Kuldeep Kuldeep",
+        "manager_phone": "0497580120",
+    },
+    "Innaloo": {
+        "company_name": "Star Car Wash",
+        "company_address": "Westfield Innaloo (Level 1 car park near Kmart Service Centre), Cnr Scarborough Beach Rd & Ellen Stirling Blvd, Innaloo WA 6021",
+        "manager_name": "Raj Partap Singh Dhanju",
+        "manager_phone": "0470382410",
+    },
+}
 
 # ---------------- HELPERS ----------------
 def format_date(dt):
@@ -59,7 +79,7 @@ def insert_signature(doc, image_path):
             run.add_picture(image_path, width=Inches(2.2))
             return
 
-def generate_contract(data, signature_path=None):
+def generate_contract(data, company, signature_path=None):
     doc = Document(TEMPLATE_FILE)
 
     replacements = {
@@ -68,6 +88,10 @@ def generate_contract(data, signature_path=None):
         "{{employee_address}}": data["employee_address"],
         "{{start_date}}": data["start_date"],
         "{{date_today}}": data["date_today"],
+        "{{company_name}}": company["company_name"],
+        "{{company_address}}": company["company_address"],
+        "{{manager_name}}": company["manager_name"],
+        "{{manager_phone}}": company["manager_phone"],
     }
 
     replace_everywhere(doc, replacements)
@@ -85,6 +109,8 @@ st.title("Employee Contract Generator")
 
 st.markdown(f"**Position:** {POSITION}")
 st.markdown(f"**Pay Rate:** {PAY_RATE}")
+company_key = st.selectbox("Select Company", list(COMPANIES.keys()))
+company = COMPANIES[company_key]
 
 with st.form("contract_form"):
     employee_name = st.text_input("Full Name")
@@ -133,7 +159,7 @@ if submitted:
         "date_today": format_date(contract_dt),
     }
 
-    output = generate_contract(data, sig_path)
+    output = generate_contract(data, company, sig_path)
 
     filename = employee_name.strip().replace(" ", "_") + "_Contract.docx"
 
