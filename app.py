@@ -24,7 +24,7 @@ COMPANIES = {
         "manager_name": "Harpreet Singh",
         "manager_phone": "0414409284",
     },
-    "Galleria (Ks & K Pty Ltd)": {
+    "Galleria": {
         "company_name": "Ks & K Pty Ltd",
         "company_address": "Star Car Wash - Galleria, Galleria Shopping Centre, 4 Collier Rd, Morley WA 6062",
         "manager_name": "Kuldeep Kuldeep",
