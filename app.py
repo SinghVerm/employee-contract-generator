@@ -36,6 +36,12 @@ COMPANIES = {
         "manager_name": "Raj Partap Singh Dhanju",
         "manager_phone": "0470382410",
     },
+    "Midland": {
+        "company_name": "SY Enterprises Group Pty Ltd",
+        "company_address": "Star Carwash Midland, Midland Gate Shopping Centre, 274 Great Eastern Hwy, Midland WA 6056",
+        "manager_name": "Jatinder Singh",
+        "manager_phone": "0468378717",
+    },
 }
 
 # ---------------- HELPERS ----------------
