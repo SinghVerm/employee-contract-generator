@@ -132,6 +132,7 @@ with st.form("contract_form"):
         height=160,
         width=500,
         drawing_mode="freedraw",
+        update_streamlit=True,
         return_image_data=True,
         key="signature_box",
     )
@@ -152,11 +153,15 @@ if submitted:
 
     # Signature save
     sig_path = None
-    if canvas.image_data is not None:
-        img = Image.fromarray(canvas.image_data.astype("uint8"))
-        tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
-        img.save(tmp.name)
-        sig_path = tmp.name
+
+    if canvas.image_data is None:
+        st.error("Please draw your signature before generating the contract.")
+        st.stop()
+
+    img = Image.fromarray(canvas.image_data.astype("uint8"))
+    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
+    img.save(tmp.name)
+    sig_path = tmp.name
 
     data = {
         "position": POSITION,
