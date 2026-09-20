@@ -132,6 +132,7 @@ with st.form("contract_form"):
         height=160,
         width=500,
         drawing_mode="freedraw",
+        return_image_data=True,
         key="signature_box",
     )
 
