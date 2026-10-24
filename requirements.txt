@@ -1,4 +1,9 @@
 streamlit>=1.46,<2
-google-api-python-client>=2.170,<3
-google-auth>=2.35,<3
-google-auth-oauthlib>=1.2,<2
+python-docx
+streamlit-drawable-canvas
+Pillow
+reportlab
+google-api-python-client
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
