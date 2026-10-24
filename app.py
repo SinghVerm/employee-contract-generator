@@ -390,8 +390,12 @@ with contract_tab:
         address = st.text_area("Residential address", key=f"address_{selected}")
         phone = st.text_input("Phone number", key=f"phone_{selected}")
         dob = st.date_input(
-            "Date of birth", value=None, max_value=local_today(),
-            format="DD/MM/YYYY", key=f"dob_{selected}",
+            "Date of birth",
+            value=None,
+            min_value=date(1900, 1, 1),
+            max_value=local_today(),
+            format="DD/MM/YYYY",
+            key=f"dob_{selected}",
         )
         details_complete = bool(start and address.strip() and phone.strip() and dob)
         if not details_complete:
