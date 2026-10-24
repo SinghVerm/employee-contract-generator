@@ -238,6 +238,8 @@ def build_contract(employee: dict, company: dict, details: dict,
         "{{employee_address}}": details["address"],
         "{{employee_phone}}": details["phone"],
         "{{phone}}": details["phone"],
+        "{{emergency_contact_name}}": details["emergency_contact_name"],
+        "{{emergency_contact_phone}}": details["emergency_contact_phone"],
         "{{date_of_birth}}": display_date(details["dob"]),
         "{{dob}}": display_date(details["dob"]),
         "{{start_date}}": display_date(details["start_date"]),
@@ -389,6 +391,14 @@ with contract_tab:
             )
         address = st.text_area("Residential address", key=f"address_{selected}")
         phone = st.text_input("Phone number", key=f"phone_{selected}")
+        emergency_name = st.text_input(
+            "Emergency Contact Full Name",
+            key=f"emergency_name_{selected}",
+        )
+        emergency_phone = st.text_input(
+            "Emergency Contact Phone Number",
+            key=f"emergency_phone_{selected}",
+        )
         dob_text = st.text_input(
             "Date of birth (DD/MM/YYYY)",
             placeholder="e.g. 15/06/1990",
@@ -404,7 +414,14 @@ with contract_tab:
             except ValueError:
                 st.error("Please enter a valid date in DD/MM/YYYY format.")
                 dob = None
-        details_complete = bool(start and address.strip() and phone.strip() and dob)
+        details_complete = bool(
+            start
+            and address.strip()
+            and phone.strip()
+            and dob
+            and emergency_name.strip()
+            and emergency_phone.strip()
+        )
         if not details_complete:
             st.info("Enter your start date (if needed), address, phone and date of birth.")
         st.write("**Draw your signature**")
@@ -422,8 +439,12 @@ with contract_tab:
         contract_ready = bool(details_complete and contract_signature and accepted_contract)
         if details_complete:
             contract_details = {
-                "start_date": start, "address": address.strip(),
-                "phone": phone.strip(), "dob": dob,
+                "start_date": start,
+                "address": address.strip(),
+                "phone": phone.strip(),
+                "dob": dob,
+                "emergency_contact_name": emergency_name.strip(),
+                "emergency_contact_phone": emergency_phone.strip(),
             }
         if contract_ready:
             st.success("Contract details and signature ready for final submission.")
