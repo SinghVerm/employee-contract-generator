@@ -389,14 +389,21 @@ with contract_tab:
             )
         address = st.text_area("Residential address", key=f"address_{selected}")
         phone = st.text_input("Phone number", key=f"phone_{selected}")
-        dob = st.date_input(
-            "Date of birth",
-            value=None,
-            min_value=date(1900, 1, 1),
-            max_value=local_today(),
-            format="DD/MM/YYYY",
+        dob_text = st.text_input(
+            "Date of birth (DD/MM/YYYY)",
+            placeholder="e.g. 15/06/1990",
+            max_chars=10,
             key=f"dob_{selected}",
         )
+        dob = None
+        if dob_text.strip():
+            try:
+                dob = datetime.strptime(dob_text.strip(), "%d/%m/%Y").date()
+                if not date(1900, 1, 1) <= dob <= local_today():
+                    raise ValueError
+            except ValueError:
+                st.error("Please enter a valid date in DD/MM/YYYY format.")
+                dob = None
         details_complete = bool(start and address.strip() and phone.strip() and dob)
         if not details_complete:
             st.info("Enter your start date (if needed), address, phone and date of birth.")
