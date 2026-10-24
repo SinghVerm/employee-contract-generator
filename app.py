@@ -558,7 +558,7 @@ with documents_tab:
     if visa_required:
         st.write("**Visa evidence** — attach at least one file.")
         visas = st.file_uploader(
-            "Visa / grant notice", type=["pdf", "jpg", "jpeg", "png"],
+            "Visa / Vevo Check", type=["pdf", "jpg", "jpeg", "png"],
             accept_multiple_files=True, key=f"visa_{selected}",
         )
         if not visas:
