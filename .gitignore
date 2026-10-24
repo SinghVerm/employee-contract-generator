@@ -1,0 +1,10 @@
+.streamlit/secrets.toml
+client_secret*.json
+employee_secrets.toml
+google_secrets.toml
+employee_access_codes.csv
+employees.csv
+__pycache__/
+.pytest_cache/
+.venv/
+.DS_Store
