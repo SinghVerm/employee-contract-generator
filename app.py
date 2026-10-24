@@ -412,7 +412,7 @@ with contract_tab:
             fill_color="rgba(255,255,255,0)", stroke_width=2,
             stroke_color="#000000", background_color="#FFFFFF",
             height=160, width=480, drawing_mode="freedraw",
-            update_streamlit=True, key=f"signature_{selected}",
+            update_streamlit=True, return_image_data=True, key=f"signature_{selected}",
         )
         accepted_contract = st.checkbox(
             "I have read and accept the employment contract.",
@@ -491,7 +491,7 @@ with whs_tab:
                 fill_color="rgba(255,255,255,0)", stroke_width=2,
                 stroke_color="#000000", background_color="#FFFFFF",
                 height=140, width=480, drawing_mode="freedraw",
-                update_streamlit=True, key=f"whs_signature_{selected}",
+                update_streamlit=True, return_image_data=True, key=f"whs_signature_{selected}",
             )
             acknowledged = st.checkbox(
                 "I have answered honestly, recorded any training or clarification I need, "
